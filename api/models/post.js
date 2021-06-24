@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 const statusList = ['public', 'private'];
 
 const postSchema = new Schema({
-  title: { type: String, minLength: 3, maxLength: 100, required: true },
+  title: { type: String, minLength: 3, maxLength: 50, required: true },
   text: { type: String, minLength: 3, maxLength: 300, required: true },
-  userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  timestamp: { type: Date, default: Date.now, required: true },
+  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  timestamp: { type: Date, default: Date.now, required: true, immutable: true },
   status: {
     type: String,
     required: true,
