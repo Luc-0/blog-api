@@ -1,0 +1,56 @@
+.text-center {
+  text-align: center;
+}
+
+.m2-y {
+  margin: 15px 0;
+}
+
+.m2-x {
+  margin: 0 15px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav ul {
+  list-style: none;
+}
+
+.nav ul li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.post {
+  width: 300px;
+  margin: 30px auto;
+  border: 1px solid #ddd;
+  padding: 15px;
+}
+
+.detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.post-page {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.comment {
+  border-top: 1px solid #ddd;
+  padding: 5px;
+}
