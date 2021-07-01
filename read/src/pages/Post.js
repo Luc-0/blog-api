@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import CommentList from '../components/CommentList';
+import CommentForm from '../components/CommentForm';
 
 export default function Post() {
   const [comments, setComments] = useState([]);
@@ -52,7 +53,10 @@ export default function Post() {
           </header>
 
           <div>{post.text}</div>
-
+          <CommentForm
+            path={`${process.env.REACT_APP_API_URL}/posts/${params.postId}/comments`}
+            handleNewComment={handleNewComment}
+          />
           <div>{comments ? <CommentList comments={comments} /> : null}</div>
         </div>
       ) : (
@@ -60,4 +64,8 @@ export default function Post() {
       )}
     </div>
   );
+
+  function handleNewComment(comment) {
+    setComments([...comments, { ...comment }]);
+  }
 }

@@ -54,3 +54,26 @@
   border-top: 1px solid #ddd;
   padding: 5px;
 }
+
+.form {
+  min-width: 300px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+.form-group {
+  margin: 20px 0;
+}
+
+.form button {
+  height: 38px;
+  background-color: white;
+  border: 1px solid #333;
+  padding: 0 10px;
+  border-radius: 3px;
+}
+
+.form-label input,
+.form-label textarea {
+  width: 100%;
+}
