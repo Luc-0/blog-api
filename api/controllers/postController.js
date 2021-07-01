@@ -10,21 +10,25 @@ exports.getPosts = [
   (req, res, next) => {
     jwt.verify(req.token, process.env.SECRET_JWT, (err) => {
       if (err) {
-        Post.find({ status: 'public' }, (err, posts) => {
-          if (err) {
-            return next(err);
-          }
+        Post.find({ status: 'public' })
+          .populate('user', 'name')
+          .exec((err, posts) => {
+            if (err) {
+              return next(err);
+            }
 
-          return res.json(posts);
-        });
+            return res.json(posts);
+          });
       } else {
-        Post.find({}, (err, posts) => {
-          if (err) {
-            return next(err);
-          }
+        Post.find({})
+          .populate('user', 'name')
+          .exec((err, posts) => {
+            if (err) {
+              return next(err);
+            }
 
-          return res.json(posts);
-        });
+            return res.json(posts);
+          });
       }
     });
   },
