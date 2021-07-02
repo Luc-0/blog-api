@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar({ auth, signOut }) {
   return (
     <nav className="App-nav">
       <header className="App-header">
@@ -20,9 +20,17 @@ export default function Navbar() {
         <li>
           <Link to="/comments">Comments</Link>
         </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
+        {auth ? (
+          <li>
+            <button className="btn" onClick={signOut}>
+              Sign out
+            </button>
+          </li>
+        ) : (
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

@@ -4,9 +4,11 @@ import React, { useState, useEffect } from 'react';
 
 import Navbar from './components/Navbar';
 import PostList from './components/PostList';
+import Login from './pages/Login';
 
 function App() {
   const [posts, setPosts] = useState([]);
+  const [auth, setAuth] = useState();
 
   useEffect(() => {
     loadPosts();
@@ -15,13 +17,17 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar />
+        <Navbar signOut={signOut} auth={auth} />
 
         <Switch>
           <Route exact path="/" component={() => <PostList posts={posts} />} />
           <Route exact path="/comments" component="" />
           <Route exact path="/posts/new" component="" />
-          <Route exact path="/login" component="" />
+          <Route
+            exact
+            path="/login"
+            component={() => <Login getAuth={getAuth} />}
+          />
         </Switch>
       </Router>
     </div>
@@ -32,6 +38,14 @@ function App() {
 
     const postsData = await fetch(apiUrl).then((res) => res.json());
     setPosts(postsData);
+  }
+
+  function getAuth(authData) {
+    setAuth(authData);
+  }
+
+  function signOut() {
+    setAuth(null);
   }
 }
 

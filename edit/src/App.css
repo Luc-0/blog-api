@@ -3,10 +3,23 @@ body {
   min-height: 100vh;
 }
 
+.btn {
+  height: 38px;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 3px;
+  padding: 0 10px;
+  color: #282c34;
+}
+
+.text-center {
+  text-align: center;
+}
+
 .App-header {
   font-size: calc(5px + 2vmin);
   margin: 0;
-  padding: 0 15px;
+  padding: 5px 15px;
 }
 
 .App-header > * {
@@ -47,4 +60,28 @@ body {
 
 .Postcard-detail a {
   padding: 10px;
+}
+
+.Loginform {
+  max-width: 500px;
+  margin: 50px auto 0;
+}
+
+.form .form-group {
+  margin-top: 15px;
+}
+
+.form input {
+  height: 34px;
+  padding: 0 3px;
+  width: 100%;
+}
+
+.form button {
+  width: 100%;
+  margin: 15px 0;
+}
+
+.form .form-error {
+  color: #ff8080;
 }
