@@ -1,4 +1,4 @@
-.App {
+body {
   background-color: #282c34;
   min-height: 100vh;
 }
@@ -23,4 +23,28 @@
 .App-nav li {
   display: inline-block;
   padding: 0 10px;
+}
+
+.Postcard {
+  max-width: 700px;
+  margin: 40px auto;
+  color: white;
+}
+
+.Postcard-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Postcard-text {
+  margin: 20px 0;
+}
+
+.Postcard-detail {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Postcard-detail a {
+  padding: 10px;
 }
