@@ -4,10 +4,23 @@
 }
 
 .App-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(5px + 2vmin);
+  margin: 0;
+  padding: 0 15px;
+}
+
+.App-header > * {
   color: white;
+}
+
+.App-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+}
+
+.App-nav li {
+  display: inline-block;
+  padding: 0 10px;
 }
