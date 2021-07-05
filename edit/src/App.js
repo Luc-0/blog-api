@@ -14,6 +14,16 @@ function App() {
     loadPosts();
   }, []);
 
+  useEffect(() => {
+    if (auth === null) {
+      loadPosts();
+    }
+    if (!auth) {
+      return;
+    }
+    loadPosts();
+  }, [auth]);
+
   return (
     <div className="App">
       <Router>
@@ -36,7 +46,12 @@ function App() {
   async function loadPosts() {
     const apiUrl = `${process.env.REACT_APP_API_URL}/posts`;
 
-    const postsData = await fetch(apiUrl).then((res) => res.json());
+    const postsData = await fetch(apiUrl, {
+      method: 'GET',
+      headers: new Headers({
+        Authorization: auth ? `Bearer ${auth.token}` : null,
+      }),
+    }).then((res) => res.json());
     setPosts(postsData);
   }
 
