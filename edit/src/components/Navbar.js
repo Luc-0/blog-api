@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Navbar({ auth, signOut }) {
+import AuthContext from '../AuthContext';
+
+export default function Navbar({ signOut }) {
+  const auth = useContext(AuthContext);
+
   return (
     <nav className="App-nav">
       <header className="App-header">

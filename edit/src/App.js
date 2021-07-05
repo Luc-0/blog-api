@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import PostList from './components/PostList';
 import Login from './pages/Login';
+import AuthContext from './AuthContext';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -25,22 +26,28 @@ function App() {
   }, [auth]);
 
   return (
-    <div className="App">
-      <Router>
-        <Navbar signOut={signOut} auth={auth} />
+    <AuthContext.Provider value={auth}>
+      <div className="App">
+        <Router>
+          <Navbar signOut={signOut} />
 
-        <Switch>
-          <Route exact path="/" component={() => <PostList posts={posts} />} />
-          <Route exact path="/comments" component="" />
-          <Route exact path="/posts/new" component="" />
-          <Route
-            exact
-            path="/login"
-            component={() => <Login getAuth={getAuth} />}
-          />
-        </Switch>
-      </Router>
-    </div>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              component={() => <PostList posts={posts} />}
+            />
+            <Route exact path="/comments" component="" />
+            <Route exact path="/posts/new" component="" />
+            <Route
+              exact
+              path="/login"
+              component={() => <Login getAuth={getAuth} />}
+            />
+          </Switch>
+        </Router>
+      </div>
+    </AuthContext.Provider>
   );
 
   async function loadPosts() {
