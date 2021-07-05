@@ -35,7 +35,9 @@ function App() {
             <Route
               exact
               path="/"
-              component={() => <PostList posts={posts} />}
+              component={() => (
+                <PostList postUpdate={postUpdate} posts={posts} />
+              )}
             />
             <Route exact path="/comments" component="" />
             <Route exact path="/posts/new" component="" />
@@ -68,6 +70,21 @@ function App() {
 
   function signOut() {
     setAuth(null);
+  }
+
+  function postUpdate(updatedPost) {
+    if (!updatedPost) {
+      return;
+    }
+
+    const updatedPosts = posts.map((post) => {
+      if (post._id === updatedPost._id) {
+        return updatedPost;
+      }
+      return post;
+    });
+
+    setPosts(updatedPosts);
   }
 }
 

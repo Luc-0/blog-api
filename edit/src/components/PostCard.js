@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Post({ post }) {
+import Publish from './Publish';
+
+export default function Post({ post, postUpdate }) {
   return (
     <div className="Postcard">
       {post ? (
         <article>
           <header className="Postcard-header">
             <h3>{post.title}</h3>
-            <button>Unpublish</button>
+            <Publish post={post} postUpdate={postUpdate} />
           </header>
 
           <p className="Postcard-text">{post.text}</p>
