@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import PostList from './components/PostList';
 import Login from './pages/Login';
+import Post from './pages/Post';
+
 import AuthContext from './AuthContext';
 
 function App() {
@@ -46,6 +48,7 @@ function App() {
               path="/login"
               component={() => <Login getAuth={getAuth} />}
             />
+            <Route exact path="/posts/:postId" component={Post} />
           </Switch>
         </Router>
       </div>

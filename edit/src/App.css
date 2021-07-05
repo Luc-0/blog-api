@@ -12,6 +12,10 @@ body {
   color: #282c34;
 }
 
+.b-danger {
+  background-color: #ff8080;
+}
+
 .text-center {
   text-align: center;
 }
@@ -84,4 +88,57 @@ body {
 
 .form .form-error {
   color: #ff8080;
+}
+
+.m2-y {
+  margin: 15px auto;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.post-page {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.comment {
+  border: 1px solid #ddd;
+  margin-top: 20px;
+  padding: 15px;
+}
+
+.comment-text {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.comment input,
+.comment textarea {
+  background-color: #282c34;
+  color: white;
+  border: 1px solid #60636b;
+  padding: 3px;
+  border-radius: 3px;
+  outline: 2px solid #222;
+}
+
+.comment input {
+  margin-left: 5px;
+}
+
+.comment ul {
+  list-style: disc;
+  padding-left: 15px;
+  margin-top: 15px;
+  color: #ff8080;
+}
+
+.comment button {
+  margin-right: 5px;
 }
