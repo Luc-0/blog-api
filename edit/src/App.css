@@ -71,6 +71,11 @@ body {
   margin: 50px auto 0;
 }
 
+.post-form {
+  max-width: 450px;
+  margin: 50px auto 0;
+}
+
 .form .form-group {
   margin-top: 15px;
 }
@@ -78,7 +83,18 @@ body {
 .form input {
   height: 34px;
   padding: 0 3px;
+}
+
+.form textarea,
+.form input {
   width: 100%;
+  margin-top: 5px;
+}
+
+.form input[type='checkbox'] {
+  width: auto;
+  vertical-align: middle;
+  margin-left: 7px;
 }
 
 .form button {
@@ -132,7 +148,8 @@ body {
   margin-left: 5px;
 }
 
-.comment ul {
+.comment ul,
+.form ul {
   list-style: disc;
   padding-left: 15px;
   margin-top: 15px;

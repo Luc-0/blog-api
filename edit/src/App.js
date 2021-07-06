@@ -4,6 +4,9 @@ import React, { useState, useEffect } from 'react';
 
 import Navbar from './components/Navbar';
 import PostList from './components/PostList';
+import PostForm from './components/PostForm';
+import { createPost as sendNewPost } from './helpers/api';
+
 import Login from './pages/Login';
 import Post from './pages/Post';
 
@@ -38,11 +41,15 @@ function App() {
               exact
               path="/"
               component={() => (
-                <PostList postUpdate={postUpdate} posts={posts} />
+                <PostList postUpdate={postsUpdate} posts={posts} />
               )}
             />
             <Route exact path="/comments" component="" />
-            <Route exact path="/posts/new" component="" />
+            <Route
+              exact
+              path="/posts/new"
+              component={() => <PostForm getPostData={createPost} />}
+            />
             <Route
               exact
               path="/login"
@@ -75,7 +82,7 @@ function App() {
     setAuth(null);
   }
 
-  function postUpdate(updatedPost) {
+  function postsUpdate(updatedPost) {
     if (!updatedPost) {
       return;
     }
@@ -88,6 +95,27 @@ function App() {
     });
 
     setPosts(updatedPosts);
+  }
+
+  function postsUpdateNew(newPost) {
+    if (!newPost) {
+      return;
+    }
+
+    setPosts([...posts, { ...newPost }]);
+  }
+
+  function createPost(postInput) {
+    if (!auth) {
+      return;
+    }
+
+    sendNewPost(auth.token, postInput, (newPost) => {
+      if (!newPost) {
+        return;
+      }
+      postsUpdateNew(newPost);
+    });
   }
 }
 
