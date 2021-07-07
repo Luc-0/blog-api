@@ -2,10 +2,10 @@ import React, { useContext, useState } from 'react';
 
 import AuthContext from '../AuthContext';
 import { loginAlert } from '../helpers/auth';
-import { updateComment } from '../helpers/api';
+import { updateComment, deleteComment } from '../helpers/api';
 import { useParams } from 'react-router-dom';
 
-export default function Comment({ comment }) {
+export default function Comment({ comment, updateDeletedComment }) {
   const auth = useContext(AuthContext);
   const params = useParams();
 
@@ -55,6 +55,12 @@ export default function Comment({ comment }) {
               <button type="submit" className="btn m2-y">
                 Update
               </button>
+              <button
+                onClick={handleCommentDelete}
+                className="btn b-danger m2-y"
+              >
+                Delete
+              </button>
             </div>
           )}
         </form>
@@ -84,6 +90,21 @@ export default function Comment({ comment }) {
       }
     );
     setIsUpdating(true);
+  }
+
+  function handleCommentDelete(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    if (loginAlert(auth)) {
+      return;
+    }
+
+    deleteComment(auth.token, comment, (deletedComment) => {
+      if (!deleteComment) {
+        return;
+      }
+      updateDeletedComment(deletedComment);
+    });
   }
 
   function handleInputChange(e) {

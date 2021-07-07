@@ -1,7 +1,7 @@
 import React from 'react';
 import Comment from './Comment';
 
-export default function CommentList({ comments }) {
+export default function CommentList({ comments, updateDeletedComment }) {
   return (
     <div className="m2-y">
       {comments && comments.length > 0 ? (
@@ -9,7 +9,11 @@ export default function CommentList({ comments }) {
           <h5>Comments:</h5>
           <div>
             {comments.map((comment) => (
-              <Comment key={comment._id} comment={comment} />
+              <Comment
+                updateDeletedComment={updateDeletedComment}
+                key={comment._id}
+                comment={comment}
+              />
             ))}
           </div>
         </div>

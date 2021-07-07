@@ -42,11 +42,29 @@ export default function Post() {
           </header>
 
           <div>{post.text}</div>
-          <div>{comments ? <CommentList comments={comments} /> : null}</div>
+          <div>
+            {comments ? (
+              <CommentList
+                updateDeletedComment={updateDeletedComment}
+                comments={comments}
+              />
+            ) : null}
+          </div>
         </div>
       ) : (
         <div className="text-center">Loading</div>
       )}
     </div>
   );
+
+  function updateDeletedComment(deletedComment) {
+    if (!comments) {
+      return;
+    }
+    const newComments = comments.filter(
+      (comment) => comment._id !== deletedComment._id
+    );
+
+    setComments(newComments);
+  }
 }

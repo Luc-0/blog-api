@@ -67,4 +67,24 @@ function updateComment(token, postId, comment, callback) {
   xhr.send(JSON.stringify(comment));
 }
 
-export { createPost, updatePost, updateComment };
+function deleteComment(token, comment, callback) {
+  fetch(
+    `${process.env.REACT_APP_API_URL}/posts/${comment.post}/comments/${comment._id}`,
+    {
+      method: 'DELETE',
+      headers: new Headers({
+        Authorization: 'Bearer ' + token,
+      }),
+    }
+  )
+    .then((res) => res.json())
+    .then((res) => {
+      if (res && res.code === 200) {
+        return callback(res.comment);
+      }
+
+      callback(false);
+    });
+}
+
+export { createPost, updatePost, updateComment, deleteComment };
