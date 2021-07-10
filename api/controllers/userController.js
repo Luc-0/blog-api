@@ -30,6 +30,7 @@ exports.loginPost = function (req, res) {
           }
 
           return res.json({
+            user: user[0],
             token,
           });
         }

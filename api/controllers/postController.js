@@ -65,16 +65,11 @@ exports.updatePost = [
       ...req.postInput,
     });
 
-    Post.findByIdAndUpdate(
-      req.params.postId,
-      inputPost,
-      {
-        new: true,
-        fields: {
-          user: 0,
-        },
-      },
-      (err, updatedPost) => {
+    Post.findByIdAndUpdate(req.params.postId, inputPost, {
+      new: true,
+    })
+      .populate('user', 'name')
+      .exec((err, updatedPost) => {
         if (err) {
           return next(err);
         }
@@ -93,8 +88,7 @@ exports.updatePost = [
           message: 'Post updated',
           post: updatedPost,
         });
-      }
-    );
+      });
   },
 ];
 
