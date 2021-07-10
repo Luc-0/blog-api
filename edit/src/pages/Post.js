@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useParams, Link } from 'react-router-dom';
 
 import CommentList from '../components/CommentList';
+import AuthContext from '../AuthContext';
 
 export default function Post() {
   const [post, setPost] = useState();
@@ -9,6 +10,7 @@ export default function Post() {
 
   const location = useLocation();
   const params = useParams();
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
     if (location.state && location.state.post) {
@@ -19,9 +21,13 @@ export default function Post() {
   useEffect(() => {
     async function loadComments() {
       const fetchComments = await fetch(
-        `${process.env.REACT_APP_API_URL}/posts/${params.postId}/comments`
+        `${process.env.REACT_APP_API_URL}/posts/${params.postId}/comments`,
+        {
+          headers: new Headers({
+            Authorization: `Bearer ${auth ? auth.token : null}`,
+          }),
+        }
       ).then((res) => res.json());
-
       setComments(fetchComments);
     }
     if (post) {
