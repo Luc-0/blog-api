@@ -45,7 +45,6 @@ function App() {
                 <PostList postUpdate={postsUpdate} posts={posts} />
               )}
             />
-            <Route exact path="/comments" component="" />
             <Route
               exact
               path="/posts/new"

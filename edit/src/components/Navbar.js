@@ -21,9 +21,6 @@ export default function Navbar({ signOut }) {
         <li>
           <Link to="/">Posts</Link>
         </li>
-        <li>
-          <Link to="/comments">Comments</Link>
-        </li>
         {auth ? (
           <li>
             <button className="btn" onClick={signOut}>
