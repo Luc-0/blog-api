@@ -66,7 +66,6 @@ export default function LoginForm({ getAuth, path }) {
     xhr.onload = function () {
       const authRes = JSON.parse(this.responseText);
 
-      console.log(authRes);
       if (authRes && !authRes.error) {
         getAuth(authRes);
         history.push('/');
