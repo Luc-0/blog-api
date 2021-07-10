@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, Link } from 'react-router-dom';
 
 import CommentList from '../components/CommentList';
 
@@ -42,6 +42,17 @@ export default function Post() {
           </header>
 
           <div>{post.text}</div>
+          <Link
+            to={{
+              pathname: `/posts/${post._id}/edit`,
+              state: {
+                post: post,
+              },
+            }}
+          >
+            Edit
+          </Link>
+
           <div>
             {comments ? (
               <CommentList

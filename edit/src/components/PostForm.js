@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import AuthContext from '../AuthContext';
 import { loginAlert } from '../helpers/auth';
 
-export default function PostForm({ getPostData }) {
+export default function PostForm({ getPostData, post = null }) {
   const auth = useContext(AuthContext);
   const [postInput, setPostInput] = useState({
     title: '',
@@ -12,6 +12,18 @@ export default function PostForm({ getPostData }) {
   });
   const [isInvalidInput, setIsInvalidInput] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
+
+  useEffect(() => {
+    if (!post) {
+      return;
+    }
+
+    setPostInput({
+      title: post.title,
+      text: post.text,
+      status: post.status,
+    });
+  }, [post]);
 
   return (
     <form className="post-form form" onSubmit={handleSubmit}>
@@ -28,7 +40,7 @@ export default function PostForm({ getPostData }) {
 
       <div className="form-group">
         <label>
-          Title
+          Text
           <textarea
             name="text"
             value={postInput.text}
@@ -57,9 +69,13 @@ export default function PostForm({ getPostData }) {
         </div>
       ) : null}
       {isCreating ? (
-        <div className="text-center">Creating post...</div>
+        <div className="text-center">
+          {post ? 'Updating post...' : 'Creating post...'}
+        </div>
       ) : (
-        <button className="btn">Create new post</button>
+        <button className="btn">
+          {post ? 'Update post' : 'Create new post'}
+        </button>
       )}
     </form>
   );

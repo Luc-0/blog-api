@@ -5,12 +5,13 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import PostList from './components/PostList';
 import PostForm from './components/PostForm';
-import { createPost as sendNewPost } from './helpers/api';
+import { createPost as sendNewPost, updatePost } from './helpers/api';
 
 import Login from './pages/Login';
 import Post from './pages/Post';
 
 import AuthContext from './AuthContext';
+import Edit from './pages/Edit';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -49,6 +50,17 @@ function App() {
               exact
               path="/posts/new"
               component={() => <PostForm getPostData={createPost} />}
+            />
+            <Route
+              exact
+              path="/posts/:postId/edit"
+              component={(props) => (
+                <Edit
+                  {...props}
+                  postsUpdate={postsUpdate}
+                  updatePost={handleUpdatePost}
+                />
+              )}
             />
             <Route
               exact
@@ -115,6 +127,23 @@ function App() {
         return;
       }
       postsUpdateNew(newPost);
+    });
+  }
+
+  function handleUpdatePost(postInput, oldPost, cb) {
+    if (!auth) {
+      return;
+    }
+
+    const updatedPost = {
+      ...oldPost,
+      title: postInput.title,
+      text: postInput.text,
+      status: postInput.status == 'public' ? true : false,
+    };
+
+    updatePost(auth.token, updatedPost, updatedPost.status, (post) => {
+      cb(post);
     });
   }
 }
